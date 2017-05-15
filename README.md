@@ -1,4 +1,4 @@
-Add form values to `.deatils` using `socument.createElement` and `appendChild`, instead of `innerHTML`.
+Add form values to `.deatails` using `document.createElement` and `appendChild`, instead of `innerHTML`.
 
 *
 Break out some of this functionality into a separate function
