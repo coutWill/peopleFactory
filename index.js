@@ -6,6 +6,7 @@ personForm.onsubmit = (ev) => {
     const details = document.querySelector('.details')
     
     const personName = form.personName.value
-    details.textContent = personName
+    
+    details.innerHTML =  `<em>${personName}</em>`
 
 }
