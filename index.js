@@ -1,18 +1,33 @@
 const personForm = document.querySelector('form')
 
-const handleSubmit = (ev) => {
-  ev.preventDefault()
-  const form = ev.target
-  const details = document.querySelector('.details')
-  const personName = form.personName.value
-  const hairColor = form.hairColor.value
-  const age = form.age.value
-  const birthplace = form.birthplace.value
-
+const showColor = (hairColor) => {
+    
+  const details = document.querySelector('.details')  
   const colorDiv = document.createElement("div")
   colorDiv.style.height = "50px"
   colorDiv.style.width =  "100px"
   colorDiv.style.backgroundColor = hairColor
+  details.appendChild(colorDiv)
+  return hairColor;
+}
+
+const showElem = (pName, hColor, hairColor, Age, bPlace) =>{
+    const details = document.querySelector('.details')
+
+    details.appendChild(pName)
+    details.appendChild(hColor)
+    showColor(hairColor);
+    details.appendChild(Age)
+    details.appendChild(bPlace)
+}
+
+const handleSubmit = (ev) => {
+  ev.preventDefault()
+  const form = ev.target
+  const personName = form.personName.value
+  const hairColor = form.hairColor.value
+  const age = form.age.value
+  const birthplace = form.birthplace.value
   
   const pName = document.createElement("li")
   const hColor = document.createElement("li")
@@ -29,12 +44,6 @@ const handleSubmit = (ev) => {
   Age.appendChild(atext)
   bPlace.appendChild(btext)
 
-  details.appendChild(pName)
-  details.appendChild(hColor)
-  details.appendChild(colorDiv)
-  details.appendChild(Age)
-  details.appendChild(bPlace)
-
 //   details.innerHTML = `
 //     <ul>
 //       <li>Name: ${personName}</li>
@@ -44,6 +53,7 @@ const handleSubmit = (ev) => {
 //     </ul>
 //   `
 
+showElem(pName, hColor, hairColor, Age, bPlace)
 
 }
 
