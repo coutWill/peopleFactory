@@ -9,19 +9,18 @@ const handleSubmit = (ev) => {
   const age = form.age.value
   const birthplace = form.birthplace.value
 
-  const colorDiv = `
-    <div style="height: 50px; width: 100px; background-color: ${hairColor}"></div>
-  `
-
+  const colorDiv = document.createElement("div")
+  colorDiv.style.height = "50px"
+  colorDiv.style.width =  "100px"
+  colorDiv.style.backgroundColor = hairColor
+  
   const pName = document.createElement("li")
   const hColor = document.createElement("li")
   const Age = document.createElement("li")
   const bPlace = document.createElement("li")
 
-  const haColor = document.create
-
   const ptext = document.createTextNode("Name: " + personName)
-  const htext = document.createTextNode("Hair color: " + hairColor.target)
+  const htext = document.createTextNode("Hair color: " )
   const atext = document.createTextNode("Age: " + age)
   const btext = document.createTextNode("Birthplace: " + birthplace)
 
@@ -32,6 +31,7 @@ const handleSubmit = (ev) => {
 
   details.appendChild(pName)
   details.appendChild(hColor)
+  details.appendChild(colorDiv)
   details.appendChild(Age)
   details.appendChild(bPlace)
 
