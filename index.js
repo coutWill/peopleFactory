@@ -1,60 +1,50 @@
-const personForm = document.querySelector('form')
+const App = {
+  init() {
+    const personForm = document.querySelector('form')
+    console.log(this)
+    console.log(this.handleSubmit)
+    personForm.addEventListener('submit', (ev) => this.handleSubmit(ev))
+  },
 
-const showColor = (hairColor) => {
-    
-  const details = document.querySelector('.details')  
-  const colorDiv = document.createElement("div")
-  colorDiv.style.height = "50px"
-  colorDiv.style.width =  "100px"
-  colorDiv.style.backgroundColor = hairColor
-  details.appendChild(colorDiv)
-  return hairColor;
-}
+  renderColor(hairColor) {
+    const colorDiv = document.createElement('div')
+    colorDiv.style.height = '50px'
+    colorDiv.style.width = '100px'
+    colorDiv.style.backgroundColor = hairColor
+    return colorDiv
+  },
 
-const showElem = (pName, hColor, hairColor, Age, bPlace) =>{
+  renderListItem(name, value) {
+    const li = document.createElement('li')
+    li.innerHTML = `${name}: ${value}`
+    return li
+  },
+
+  renderList(person) {
+    const list = document.createElement('ul')
+    Array.from(person).map((input, _i, _elementsArray) => {
+      if (input.value) {
+        let value = input.value
+        if (input.type === 'color') {
+          value = this.renderColor(value).outerHTML
+        }
+        let li = this.renderListItem(input.name, value)
+        list.appendChild(li)
+      }
+    })
+
+    return list
+  },
+
+  handleSubmit(ev) {
+    ev.preventDefault()
+    const form = ev.target
     const details = document.querySelector('.details')
 
-    details.appendChild(pName)
-    details.appendChild(hColor)
-    showColor(hairColor);
-    details.appendChild(Age)
-    details.appendChild(bPlace)
+    const list = this.renderList(form.elements)
+
+    details.appendChild(list)
+  },
 }
 
-const handleSubmit = (ev) => {
-  ev.preventDefault()
-  const form = ev.target
-  const personName = form.personName.value
-  const hairColor = form.hairColor.value
-  const age = form.age.value
-  const birthplace = form.birthplace.value
-  
-  const pName = document.createElement("li")
-  const hColor = document.createElement("li")
-  const Age = document.createElement("li")
-  const bPlace = document.createElement("li")
-
-  const ptext = document.createTextNode("Name: " + personName)
-  const htext = document.createTextNode("Hair color: " )
-  const atext = document.createTextNode("Age: " + age)
-  const btext = document.createTextNode("Birthplace: " + birthplace)
-
-  pName.appendChild(ptext)
-  hColor.appendChild(htext)
-  Age.appendChild(atext)
-  bPlace.appendChild(btext)
-
-//   details.innerHTML = `
-//     <ul>
-//       <li>Name: ${personName}</li>
-//       <li>Hair Color: ${colorDiv}</li>
-//       <li>Age: ${age}</li>
-//       <li>Birthplace: ${birthplace}</li>
-//     </ul>
-//   `
-
-showElem(pName, hColor, hairColor, Age, bPlace)
-
-}
-
-personForm.addEventListener('submit', handleSubmit)
+App.init()
